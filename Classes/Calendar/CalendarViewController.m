@@ -24,13 +24,16 @@
 @synthesize calendarView;
 @synthesize calendarViewNew;
 @synthesize selectedDate;
+
+
+/* This is never called (self.selectedDate never is used)
 - (void)setSelectedDate:(NSDate *)aDate {
 	[selectedDate autorelease];
 	selectedDate = [aDate retain];
 	
 	[calendarLogic setReferenceDate:aDate];
 	[calendarView selectButtonForDate:aDate];
-}
+} */
 
 @synthesize leftButton;
 @synthesize rightButton;
@@ -155,7 +158,8 @@
 #pragma mark UI events
 
 - (void)actionClearDate:(id)sender {
-	self.selectedDate = nil;
+    [calendarView deselectButtonForDate:self.selectedDate];
+    self.selectedDate = nil;
 	[calendarView selectButtonForDate:nil];
 	
 	// Delegate called later.
@@ -168,12 +172,13 @@
 #pragma mark CalendarLogic delegate
 
 - (void)calendarLogic:(CalendarLogic *)aLogic dateSelected:(NSDate *)aDate {
-	[selectedDate autorelease];
-	selectedDate = [aDate retain];
-	
-	if ([calendarLogic distanceOfDateFromCurrentMonth:selectedDate] == 0) {
-		[calendarView selectButtonForDate:selectedDate];
+	if ([calendarLogic distanceOfDateFromCurrentMonth:aDate] == 0) {
+        [calendarView deselectButtonForDate:selectedDate];
+		[calendarView selectButtonForDate:aDate];
 	}
+    // release the old button
+    [selectedDate autorelease];
+    selectedDate = [aDate retain];
 	
 	[calendarViewControllerDelegate calendarViewController:self dateDidChange:aDate];
 }
@@ -202,7 +207,7 @@
 		[UIView beginAnimations:NULL context:nil];
 		[UIView setAnimationDelegate:self];
 		[UIView setAnimationDidStopSelector:@selector(animationMonthSlideComplete)];
-		[UIView setAnimationDuration:0.3];
+		[UIView setAnimationDuration:0.1];
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	}
 	

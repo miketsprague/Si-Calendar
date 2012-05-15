@@ -203,5 +203,9 @@
 	[calendarLogicDelegate calendarLogic:self monthChangeDirection:1];
 }
 
+-(void)done{
+    [calendarLogicDelegate done];
+}
+
 
 @end

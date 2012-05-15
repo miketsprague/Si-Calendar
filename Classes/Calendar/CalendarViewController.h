@@ -10,9 +10,10 @@
 
 #import "CalendarLogicDelegate.h"
 #import "CalendarViewControllerDelegate.h"
-
-@class CalendarLogic;
-@class CalendarMonth;
+#import "CalendarMonth.h"
+#import "CalendarLogic.h"
+//@class CalendarLogic;
+//@class CalendarMonth;
 
 @interface CalendarViewController : UIViewController <CalendarLogicDelegate> {
 	id <CalendarViewControllerDelegate> calendarViewControllerDelegate;

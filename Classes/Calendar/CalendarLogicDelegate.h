@@ -12,5 +12,6 @@
 
 - (void)calendarLogic:(CalendarLogic *)aLogic dateSelected:(NSDate *)aDate;
 - (void)calendarLogic:(CalendarLogic *)aLogic monthChangeDirection:(NSInteger)aDirection;
+- (void)done;
 
 @end

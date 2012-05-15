@@ -8,6 +8,7 @@
 
 #import "CalendarAppDelegate.h"
 #import "CalendarViewController.h"
+#import "CalendarDatePickerViewController.h"
 
 @implementation CalendarAppDelegate
 
@@ -17,9 +18,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
 	UINavigationController *navigation = [[UINavigationController alloc] init];
-	CalendarViewController *controller = [[CalendarViewController alloc] init];
+	CalendarDatePickerViewController *controller = [[CalendarDatePickerViewController alloc] init];
 	[navigation pushViewController:controller animated:NO];
 	[controller setCalendarViewControllerDelegate:self];
+    [controller setCalendarViewDatePickerControllerDelegate:self];
 	
     // Override point for customization after app launch    
     [window addSubview:navigation.view];
@@ -33,6 +35,10 @@
 	NSLog(@"Date set to: %@", aDate);
 }
 
+// Called when a range has been selected.
+- (void)calendarViewController:(CalendarViewController *)aCalendarViewController startDateSelected:(NSDate *)startDate endDateSelected:(NSDate *)endDate {
+    NSLog(@"Date range selected %@ to %@", startDate, endDate);
+}
 
 - (void)dealloc {
     [window release];

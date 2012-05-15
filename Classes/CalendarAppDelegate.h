@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CalendarViewControllerDelegate.h"
+#import "CalendarDatePickerViewControllerDelegate.h"
 
-@interface CalendarAppDelegate : NSObject <UIApplicationDelegate, CalendarViewControllerDelegate> {
+@interface CalendarAppDelegate : NSObject <UIApplicationDelegate, CalendarViewControllerDelegate, CalendarDatePickerViewControllerDelegate> {
     UIWindow *window;
 }
 

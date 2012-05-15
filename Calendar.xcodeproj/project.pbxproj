@@ -26,6 +26,7 @@
 		6EAA8DD41189B47300AE6B11 /* CalendarShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA8DC71189B47300AE6B11 /* CalendarShadow.png */; };
 		6EAA8DD51189B47300AE6B11 /* CalendarTitleColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA8DC81189B47300AE6B11 /* CalendarTitleColor.png */; };
 		6EAA8DD61189B47300AE6B11 /* CalendarTitleDimColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA8DC91189B47300AE6B11 /* CalendarTitleDimColor.png */; };
+		BB933AD6155D8FBE00A245AA /* CalendarDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB933AD5155D8FBE00A245AA /* CalendarDatePickerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,9 @@
 		6EAA8DC81189B47300AE6B11 /* CalendarTitleColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarTitleColor.png; sourceTree = "<group>"; };
 		6EAA8DC91189B47300AE6B11 /* CalendarTitleDimColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarTitleDimColor.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Calendar-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Calendar-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		BB933AD4155D8FBE00A245AA /* CalendarDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDatePickerViewController.h; sourceTree = "<group>"; };
+		BB933AD5155D8FBE00A245AA /* CalendarDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDatePickerViewController.m; sourceTree = "<group>"; };
+		BB933AD8155D90CB00A245AA /* CalendarDatePickerViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDatePickerViewControllerDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,9 @@
 				6EAA8DBD1189B47300AE6B11 /* CalendarViewController.h */,
 				6EAA8DBE1189B47300AE6B11 /* CalendarViewController.m */,
 				6E33AF2412AC632D003DE6C8 /* CalendarViewControllerDelegate.h */,
+				BB933AD4155D8FBE00A245AA /* CalendarDatePickerViewController.h */,
+				BB933AD5155D8FBE00A245AA /* CalendarDatePickerViewController.m */,
+				BB933AD8155D90CB00A245AA /* CalendarDatePickerViewControllerDelegate.h */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -239,6 +246,7 @@
 				6EAA8DCA1189B47300AE6B11 /* CalendarLogic.m in Sources */,
 				6EAA8DCB1189B47300AE6B11 /* CalendarMonth.m in Sources */,
 				6EAA8DCC1189B47300AE6B11 /* CalendarViewController.m in Sources */,
+				BB933AD6155D8FBE00A245AA /* CalendarDatePickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

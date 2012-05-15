@@ -24,11 +24,9 @@
 @synthesize calendarLogic;
 @synthesize datesIndex;
 @synthesize buttonsIndex;
+@synthesize doneButton = _doneButton;
 
 @synthesize numberOfDaysInWeek;
-@synthesize selectedButton;
-@synthesize selectedDate;
-
 
 
 #pragma mark -
@@ -38,7 +36,6 @@
 	self.calendarLogic = nil;
 	self.datesIndex = nil;
 	self.buttonsIndex = nil;
-	self.selectedDate = nil;
 	
     [super dealloc];
 }
@@ -54,8 +51,7 @@
 	// Size is static
 	NSInteger numberOfWeeks = 5;
 	frame.size.width = 320;
-	frame.size.height = ((numberOfWeeks + 1) * kCalendarDayHeight) + 60;
-	selectedButton = -1;
+	frame.size.height = (((numberOfWeeks + 1) * kCalendarDayHeight) + 60) + 55; // 55 for done bar at the bottom
 	
 	NSCalendar *calendar = [NSCalendar currentCalendar];
 	NSDateComponents *components = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[NSDate date]];	
@@ -194,6 +190,26 @@
 				[aButtonsIndex addObject:dayButton];
 			}
 		}
+        
+        _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.doneButton.opaque = YES;
+        self.doneButton.clipsToBounds = NO;
+        self.doneButton.clearsContextBeforeDrawing = NO;
+        self.doneButton.frame = CGRectMake(frame.size.width/2 - 40, frame.size.height-55+15, 80, 30);
+        self.doneButton.titleLabel.shadowOffset = CGSizeMake(0, 1);
+        self.doneButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+        self.doneButton.backgroundColor = [UIColor grayColor];
+       // doneButton.tag = [aDatesIndex count];
+        self.doneButton.adjustsImageWhenHighlighted = NO;
+        self.doneButton.adjustsImageWhenDisabled = NO;
+        self.doneButton.showsTouchWhenHighlighted = YES;
+        [self.doneButton setTitle:@"Done"
+                   forState:UIControlStateNormal];
+        [self.doneButton addTarget:self action:@selector(doneButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:self.doneButton];
+        
+        
 		
 		// save
 		self.calendarLogic = aLogic;
@@ -211,44 +227,38 @@
 - (void)dayButtonPressed:(id)sender {
 	[calendarLogic setReferenceDate:[datesIndex objectAtIndex:[sender tag]]];
 }
+
+- (void)deselectButtonForDate:(NSDate *)aDate {
+    if(aDate == nil)
+        return;
+    NSInteger buttonIndex = [self.calendarLogic indexOfCalendarDate:aDate];
+    UIButton *button = [self.buttonsIndex objectAtIndex:buttonIndex];
+    
+    CGRect selectedFrame = button.frame;
+    
+    button.selected = NO;
+    button.frame = selectedFrame;
+    
+}
+
 - (void)selectButtonForDate:(NSDate *)aDate {
-	if (selectedButton >= 0) {
-		NSDate *todayDate = [CalendarLogic dateForToday];
-		UIButton *button = [buttonsIndex objectAtIndex:selectedButton];
-		
-		CGRect selectedFrame = button.frame;
-		if ([selectedDate compare:todayDate] != NSOrderedSame) {
-			selectedFrame.origin.y = selectedFrame.origin.y + 1;
-			selectedFrame.size.width = kCalendarDayWidth;
-			selectedFrame.size.height = kCalendarDayHeight;
-		}
-		
-		button.selected = NO;
-		button.frame = selectedFrame;
-		
-		self.selectedButton = -1;
-		self.selectedDate = nil;
-	}
-	
-	if (aDate != nil) {
-		// Save
-		self.selectedButton = [calendarLogic indexOfCalendarDate:aDate];
-		self.selectedDate = aDate;
-		
-		NSDate *todayDate = [CalendarLogic dateForToday];
-		UIButton *button = [buttonsIndex objectAtIndex:selectedButton];
-		
-		CGRect selectedFrame = button.frame;
-		if ([aDate compare:todayDate] != NSOrderedSame) {
-			selectedFrame.origin.y = selectedFrame.origin.y - 1;
-			selectedFrame.size.width = kCalendarDayWidth + 1;
-			selectedFrame.size.height = kCalendarDayHeight + 1;
-		}
-		
-		button.selected = YES;
-		button.frame = selectedFrame;
-		[self bringSubviewToFront:button];	
-	}
+    if(aDate == nil)
+        return;
+    
+    NSInteger buttonIndex = [calendarLogic indexOfCalendarDate:aDate];
+    
+    UIButton *button = [self.buttonsIndex objectAtIndex:buttonIndex];
+    
+    CGRect selectedFrame = button.frame;
+    
+    button.selected = YES;
+    button.frame = selectedFrame;
+    [self bringSubviewToFront:button];	
+}
+
+-(void)doneButtonPressed {
+    // do nothing right now
+    [calendarLogic done];
 }
 
 

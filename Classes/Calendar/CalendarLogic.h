@@ -32,5 +32,6 @@
 
 - (void)selectPreviousMonth;
 - (void)selectNextMonth;
+- (void)done;
 
 @end

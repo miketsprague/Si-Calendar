@@ -17,21 +17,20 @@
 	NSArray *buttonsIndex;
 	
 	NSInteger numberOfDaysInWeek;
-	NSInteger selectedButton;
-	NSDate *selectedDate;
 }
 
 @property (nonatomic, retain) CalendarLogic *calendarLogic;
 @property (nonatomic, retain) NSArray *datesIndex;
 @property (nonatomic, retain) NSArray *buttonsIndex;
+@property (nonatomic, retain) UIButton *doneButton;
 
 @property (nonatomic) NSInteger numberOfDaysInWeek;
-@property (nonatomic) NSInteger selectedButton;
-@property (nonatomic, retain) NSDate *selectedDate;
 
 
 - (id)initWithFrame:(CGRect)frame logic:(CalendarLogic *)aLogic;
 
 - (void)selectButtonForDate:(NSDate *)aDate;
+- (void)deselectButtonForDate:(NSDate *)aDate;
+- (void)doneButtonPressed;
 
 @end
